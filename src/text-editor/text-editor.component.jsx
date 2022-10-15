@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import TextArea from "../text-area/text-area.component";
 import GeneralBtn from "../general-btn/general-btn.component";
 
+import './text-editor.styles.scss';
+
 let stack = [];
 let removed = [];
 
@@ -11,9 +13,9 @@ const TextEditor = () => {
 
   useEffect(() => {
     stack = textValue.split("");
-}, [textValue]);
+  }, [textValue]);
 
-const onChangeHandler = (e) => {
+  const onChangeHandler = (e) => {
     setTextValue(e.target.value);
     removed = [];
   };
@@ -33,11 +35,13 @@ const onChangeHandler = (e) => {
   };
 
   return (
-    <>
+    <div className="text-editor-container">
       <TextArea onchangeHandler={onChangeHandler} textValue={textValue} />
-      <GeneralBtn onClickHandler={undoHandler}>Undo</GeneralBtn>
-      <GeneralBtn onClickHandler={redoHandler}>Redo</GeneralBtn>
-    </>
+      <div className="buttons-container">
+        <GeneralBtn onClickHandler={undoHandler}>Undo</GeneralBtn>
+        <GeneralBtn onClickHandler={redoHandler}>Redo</GeneralBtn>
+      </div>
+    </div>
   );
 };
 
